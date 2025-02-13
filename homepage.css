@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    position: fixed;
+    width: 96%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 2rem;
+    border-radius: 30px;
+    border: 1px solid rgba(39, 38, 38, 0.5);
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    max-width: 1200px; 
+}
+
+a {
+    text-decoration: none;
+    color: #212e67;
+    font-weight: 500;
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+.titel {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.icon {
+    font-size: 1.8rem;
+}
+
+.svg-icon {
+    vertical-align: middle;
+    margin-bottom: 0.2rem; 
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.9); /* Anpassung der Hintergrundfarbe */
+    backdrop-filter: blur(10px); /* Weichzeichner-Effekt */
+    min-width: 200px; /* Größeres Dropdown-Menü */
+    border-radius: 0 15px 15px 15px; /* Runde Ecken nur an der oberen rechten und unteren Ecken */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border: 1px solid rgba(39, 38, 38, 0.5); /* Anpassung der Rahmenfarbe */
+    top: 4.5rem; /* Mehr Abstand nach unten */
+    left: -10px; /* Linker Abstand verringern */
+}
+
+.dropdown-content::before {
+    content: "";
+    position: absolute;
+    top: -10px; /* Positioniere das Dreieck über dem Dropdown-Menü */
+    left: 20px; /* Positioniere das Dreieck nach links */
+    border-width: 0 10px 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent rgba(255, 255, 255, 0.9) transparent;
+    filter: blur(10px); /* Weichzeichner-Effekt */
+}
+
+.dropdown-content a {
+    color: #212e67;
+    padding: 15px 20px; /* Anpassung des Abstands */
+    text-decoration: none;
+    display: block;
+    border-radius: 10px; /* Runde Ecken für Links */
+    margin-bottom: 15px; /* Mehr Platz zwischen den Links */
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(33, 46, 103, 0.1); /* Anpassung der Hover-Hintergrundfarbe */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
