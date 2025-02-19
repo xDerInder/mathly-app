@@ -42,6 +42,7 @@ body {
 }
 
 .logo {
+    mix-blend-mode: multiply;
     width: 200px;
     height: auto;
     margin-bottom: 1.5rem;
