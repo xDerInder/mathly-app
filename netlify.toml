@@ -1,6 +1,7 @@
 [build]
   functions = "netlify/functions"
   publish = "."
+  node_version = "22"
 
 [[redirects]]
   from = "/api/*"

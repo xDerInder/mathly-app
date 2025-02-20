@@ -76,11 +76,18 @@ export async function handler(event, context) {
     const data = await response.json();
     console.log('HuggingFace API Response Data:', JSON.stringify(data, null, 2));
 
-    if (!data || !Array.isArray(data) || !data[0]?.generated_text) {
+    // Überprüfe, ob die Antwort gültig ist
+    if (!data || !Array.isArray(data) || data.length === 0 || !data[0]?.generated_text) {
       throw new Error('Ungültige Antwort von der HuggingFace API');
     }
 
-    const exercise = JSON.parse(data[0].generated_text);
+    let exercise;
+    try {
+      exercise = JSON.parse(data[0].generated_text);
+    } catch (parseError) {
+      console.error('JSON Parse Error:', parseError.message);
+      throw new Error('Fehler beim Parsen der KI-Antwort. API könnte unerwartete Daten zurückgeben.');
+    }
 
     return {
       statusCode: 200,
@@ -95,4 +102,4 @@ export async function handler(event, context) {
       body: JSON.stringify({ error: error.message })
     };
   }
-} 
+}
