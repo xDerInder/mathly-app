@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 // HuggingFace API Endpoint für das Mistral Modell
 const API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1";
@@ -105,5 +105,3 @@ exports.handler = async (event, context) => {
     };
   }
 };
-
-
