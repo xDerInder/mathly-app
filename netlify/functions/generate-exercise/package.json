@@ -1,0 +1,9 @@
+{
+  "name": "generate-exercise",
+  "version": "1.0.0",
+  "main": "generate-exercise.js",
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "fetch-blob": "^3.2.0"
+  }
+}
