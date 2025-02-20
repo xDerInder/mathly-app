@@ -48,6 +48,8 @@ export async function handler(event, context) {
     - Der Lösungsweg soll in klaren, nachvollziehbaren Schritten erklärt werden
     - Gib NUR das JSON zurück, keine zusätzlichen Erklärungen[/INST]</s>`;
 
+    console.log('Generated Prompt:', prompt);
+
     // Call HuggingFace API
     const response = await fetch(API_URL, {
       method: 'POST',
@@ -58,18 +60,26 @@ export async function handler(event, context) {
       body: JSON.stringify({
         inputs: prompt,
         parameters: {
-          max_new_tokens: 512,
+          max_new_tokens: 256,
           temperature: 0.7,
           top_p: 0.9
         }
       })
     });
 
+    console.log('HuggingFace API Response Status:', response.status);
+    
     if (!response.ok) {
       throw new Error(`HuggingFace API error: ${response.statusText}`);
     }
 
     const data = await response.json();
+    console.log('HuggingFace API Response Data:', JSON.stringify(data, null, 2));
+
+    if (!data || !Array.isArray(data) || !data[0]?.generated_text) {
+      throw new Error('Ungültige Antwort von der HuggingFace API');
+    }
+
     const exercise = JSON.parse(data[0].generated_text);
 
     return {
@@ -78,11 +88,11 @@ export async function handler(event, context) {
       body: JSON.stringify(exercise)
     };
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error:', error.message, error.stack);
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({ error: error.message })
     };
   }
-}
+} 
