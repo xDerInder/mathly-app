@@ -61,17 +61,17 @@
                 <div class="topic-card">
                     <h3>Quadratische Funktionen</h3>
                     <p>Grundlagen und Anwendungen</p>
-                    <button>Jetzt lernen</button>
+                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
                 </div>
                 <div class="topic-card">
                     <h3>Lineare Gleichungen</h3>
                     <p>Gleichungen lösen und verstehen</p>
-                    <button>Jetzt lernen</button>
+                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
                 </div>
                 <div class="topic-card">
                     <h3>Terme und Variablen</h3>
                     <p>Mathematische Ausdrücke</p>
-                    <button>Jetzt lernen</button>
+                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
                 </div>
             </div>
         </section>
@@ -82,17 +82,17 @@
                 <div class="topic-card">
                     <h3>Pythagoras</h3>
                     <p>Der Satz des Pythagoras</p>
-                    <button>Jetzt lernen</button>
+                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
                 </div>
                 <div class="topic-card">
                     <h3>Flächenberechnung</h3>
                     <p>Flächen verschiedener Formen</p>
-                    <button>Jetzt lernen</button>
+                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
                 </div>
                 <div class="topic-card">
                     <h3>Kreise und Winkel</h3>
                     <p>Grundlagen der Kreisgeometrie</p>
-                    <button>Jetzt lernen</button>
+                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
                 </div>
             </div>
         </section>
@@ -103,17 +103,17 @@
                 <div class="topic-card">
                     <h3>Differentialrechnung</h3>
                     <p>Ableitungen und ihre Anwendungen</p>
-                    <button>Jetzt lernen</button>
+                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
                 </div>
                 <div class="topic-card">
                     <h3>Integralrechnung</h3>
                     <p>Grundlagen der Integration</p>
-                    <button>Jetzt lernen</button>
+                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
                 </div>
                 <div class="topic-card">
                     <h3>Kurvendiskussion</h3>
                     <p>Funktionen analysieren</p>
-                    <button>Jetzt lernen</button>
+                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
                 </div>
             </div>
         </section>
@@ -124,17 +124,17 @@
                 <div class="topic-card">
                     <h3>Datenanalyse</h3>
                     <p>Grundlegende statistische Konzepte</p>
-                    <button>Jetzt lernen</button>
+                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
                 </div>
                 <div class="topic-card">
                     <h3>Wahrscheinlichkeit</h3>
                     <p>Wahrscheinlichkeitsrechnung</p>
-                    <button>Jetzt lernen</button>
+                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
                 </div>
                 <div class="topic-card">
                     <h3>Diagramme</h3>
                     <p>Daten visualisieren</p>
-                    <button>Jetzt lernen</button>
+                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
                 </div>
             </div>
         </section>
@@ -161,6 +161,12 @@
         </a>
     </nav>
 
+    <script>
+        function showTopics(topic) {
+            localStorage.setItem('selectedTopic', topic);
+            window.location.href = 'exercise-template.html';
+        }
+    </script>
     <script src="../scripts/topics.js"></script>
 </body>
 </html>
