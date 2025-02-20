@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aufgaben - Mathly</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/exercise.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="splash-container">
+        <main class="content-wrapper">
+            <header class="exercise-header">
+                <h2 id="topic-title">Themengebiet</h2>
+                <p id="topic-description" class="sub-tagline">Beschreibung des Themengebiets</p>
+            </header>
+
+            <section class="exercise-content">
+                <div class="exercise-box">
+                    <div class="exercise-text">
+                        <h3 id="exercise-title">Aufgabentitel</h3>
+                        <p id="exercise-description">Aufgabenbeschreibung</p>
+                    </div>
+                    
+                    <div class="exercise-input">
+                        <input type="text" id="answer-input" placeholder="Deine Antwort">
+                        <button id="check-answer" class="submit-button">Überprüfen</button>
+                    </div>
+
+                    <div id="feedback" class="feedback hidden">
+                        <p id="feedback-text"></p>
+                        <button id="show-solution" class="solution-button">Lösungsweg anzeigen</button>
+                    </div>
+
+                    <button id="new-exercise" class="new-exercise-button">Neue Aufgabe</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Lösungsweg Modal -->
+        <div id="solution-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Lösungsweg</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="solution-steps"></div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="../index.html" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z"/>
+                </svg>
+                <span>Home</span>
+            </a>
+            <a href="topics.html" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+                </svg>
+                <span>Themen</span>
+            </a>
+        </nav>
+    </div>
+
+    <script src="../scripts/exercise.js"></script>
+</body>
+</html>
