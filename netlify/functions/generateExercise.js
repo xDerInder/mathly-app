@@ -18,27 +18,27 @@ export const handler = async (event) => {
         const { subject, topic, subtopic } = JSON.parse(event.body);
         
         // Prompt für die KI vorbereiten
-        const prompt = `Generiere eine Übungsaufgabe für ${subject} zum Thema ${topic}, Unterthema ${subtopic}.
-        Format:
-        {
-            "question": "Die Aufgabenstellung",
-            "hints": ["Erster Hinweis", "Zweiter Hinweis"],
-            "solution": "Die vollständige Lösung",
-            "solutionSteps": ["Schritt 1", "Schritt 2", "Schritt 3"]
-        }`;
+        const prompt = `Generiere eine ${subject}-Aufgabe zum Thema ${topic} (${subtopic}). Die Antwort MUSS im folgenden JSON-Format sein: {"question": "Aufgabenstellung hier", "hints": ["Hinweis 1", "Hinweis 2"], "solution": "Lösung hier", "solutionSteps": ["Schritt 1", "Schritt 2"]}`;
 
         console.log('Sende Anfrage an Hugging Face API...');
 
         // Hugging Face API aufrufen
         const response = await fetch(
-            'https://api-inference.huggingface.co/models/google/flan-t5-large',
+            'https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2',
             {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ inputs: prompt })
+                body: JSON.stringify({
+                    inputs: prompt,
+                    parameters: {
+                        max_new_tokens: 500,
+                        temperature: 0.7,
+                        return_full_text: false
+                    }
+                })
             }
         );
 
@@ -54,15 +54,20 @@ export const handler = async (event) => {
         // Antwort formatieren
         let exercise;
         try {
-            exercise = JSON.parse(result[0].generated_text);
+            // Versuche JSON aus der Antwort zu extrahieren
+            const match = result[0].generated_text.match(/\{.*\}/s);
+            if (match) {
+                exercise = JSON.parse(match[0]);
+            } else {
+                throw new Error('Kein JSON in der Antwort gefunden');
+            }
         } catch (e) {
-            console.log('Konnte API-Antwort nicht als JSON parsen, verwende Fallback');
-            // Fallback für nicht-JSON Antworten
+            console.log('Verwende Fallback-Aufgabe');
             exercise = {
-                question: result[0].generated_text || "Keine Aufgabe verfügbar",
-                hints: ["Versuche die Aufgabe in kleinere Schritte zu zerlegen", "Schaue dir ähnliche Beispiele an"],
-                solution: "Bitte versuche es erneut",
-                solutionSteps: ["Schritt 1: Aufgabe analysieren", "Schritt 2: Lösungsweg planen", "Schritt 3: Ausführen"]
+                question: "Was ist die Ableitung von x²?",
+                hints: ["Denke an die Potenzregel", "Der Exponent wird nach vorne multipliziert"],
+                solution: "2x",
+                solutionSteps: ["1. Potenzregel: Multipliziere mit dem Exponenten", "2. Reduziere den Exponenten um 1"]
             };
         }
 
@@ -85,8 +90,7 @@ export const handler = async (event) => {
             },
             body: JSON.stringify({ 
                 error: 'Interner Server-Fehler',
-                details: error.message,
-                stack: error.stack
+                details: error.message
             })
         };
     }
