@@ -2,6 +2,7 @@
   "name": "mathly-app",
   "version": "1.0.0",
   "description": "Eine Lernplattform für Mathematik, Physik, Biologie und Chemie",
+  "type": "module",
   "main": "index.js",
   "dependencies": {
     "node-fetch": "^2.6.9"
