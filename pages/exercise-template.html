@@ -15,15 +15,31 @@
     </div>
 
     <div class="exercise-container">
+        <div class="exercise-breadcrumb">
+            <span id="subject-name">Fach</span> > <span id="topic-name">Thema</span>
+        </div>
+
         <div id="dynamic-exercise" class="exercise-text">
             <!-- Hier wird die Aufgabe dynamisch eingefügt -->
         </div>
 
         <div class="input-section">
             <div class="math-input-field" id="math-input"></div>
-            <div class="math-tools">
-                <!-- Mathematische Werkzeuge werden dynamisch aus mathInput.js geladen -->
+            
+            <!-- Math Tools nur für Mathematik -->
+            <div id="math-tools" class="math-tools" style="display: none;">
+                <button class="math-tool" onclick="mathInput.insertSymbol('+')" title="Addition">+</button>
+                <button class="math-tool" onclick="mathInput.insertSymbol('-')" title="Subtraktion">−</button>
+                <button class="math-tool" onclick="mathInput.insertSymbol('\\cdot')" title="Multiplikation">×</button>
+                <button class="math-tool" onclick="mathInput.insertSymbol('\\div')" title="Division">÷</button>
+                <button class="math-tool" onclick="mathInput.insertFraction()" title="Bruch">a/b</button>
+                <button class="math-tool" onclick="mathInput.insertSymbol('\\sqrt')" title="Wurzel">√</button>
+                <button class="math-tool" onclick="mathInput.insertPower()" title="Potenz">x²</button>
+                <button class="math-tool" onclick="mathInput.insertSymbol('\\pi')" title="Pi">π</button>
+                <button class="math-tool" onclick="mathInput.insertSymbol('=')" title="Gleich">=</button>
+                <button class="math-tool" onclick="mathInput.insertSymbol('\\infty')" title="Unendlich">∞</button>
             </div>
+
             <button id="check-answer" class="check-button">Überprüfen</button>
         </div>
 
@@ -43,6 +59,7 @@
         </div>
     </div>
 
+    <script src="../scripts/subjects.js"></script>
     <script src="../scripts/mathInput.js"></script>
     <script src="../scripts/exercise.js"></script>
 </body>

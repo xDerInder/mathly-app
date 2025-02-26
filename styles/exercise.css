@@ -1,4 +1,10 @@
 /* Allgemeine Stile */
+:root {
+    --primary-color: #6b4984;
+    --secondary-color: #84494b;
+    --primary-gradient: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -7,26 +13,30 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f5f5f5;
+    background: linear-gradient(135deg, #f6e5f5, #e5e5f6, #e5f5f6);
     color: #333;
-    padding-bottom: 70px;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Container für Übungen */
 .splash-container {
-    background: linear-gradient(135deg, #6b4984 0%, #9b6b9e 100%);
-    padding: 1rem;
+    background: var(--primary-gradient);
+    padding: 2rem;
     text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .exercise-container {
     max-width: 800px;
     margin: 2rem auto;
-    padding: 1.5rem;
+    padding: 2.5rem;
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    flex: 1;
 }
 
 .content-wrapper {
@@ -52,93 +62,143 @@ body {
 
 /* Aufgabentext */
 .exercise-text {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .exercise-text h3 {
-    color: #333;
+    color: var(--primary-color);
     margin-bottom: 1rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.exercise-text h3::before {
+    content: '📝';
+    font-size: 2rem;
+}
+
+.exercise-question {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #2c3e50;
 }
 
 /* Eingabebereich */
 .input-section {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
     margin-bottom: 2rem;
 }
 
 .math-input-field {
     width: 100%;
-    min-height: 60px;
+    min-height: 100px;
     border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
+    border-radius: 12px;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.math-tools {
+.math-input-field:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05), 0 0 0 3px rgba(var(--primary-color-rgb), 0.1);
+}
+
+/* Breadcrumb Navigation */
+.exercise-breadcrumb {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    color: #666;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     gap: 0.5rem;
-    margin-bottom: 1rem;
+}
+
+.exercise-breadcrumb span {
+    color: var(--primary-color);
+    font-weight: 500;
 }
 
 /* Buttons */
 .new-exercise-button {
     background: white;
-    color: #6b4984;
+    color: var(--primary-color);
     border: none;
-    padding: 0.75rem 1.5rem;
+    padding: 1rem 2.5rem;
     border-radius: 25px;
     font-weight: 600;
+    font-size: 1.1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .new-exercise-button:hover {
-    background: #f0f0f0;
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.new-exercise-button:disabled {
+    background: #e0e0e0;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .check-button {
-    background: linear-gradient(135deg, #6b4984 0%, #9b6b9e 100%);
+    background: var(--primary-gradient);
     color: white;
     border: none;
-    padding: 0.75rem 1.5rem;
+    padding: 1rem 3rem;
     border-radius: 25px;
     font-weight: 600;
+    font-size: 1.1rem;
     cursor: pointer;
     transition: all 0.3s ease;
     align-self: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .check-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(107, 73, 132, 0.2);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .solution-button {
     background: transparent;
     color: #6b4984;
     border: 2px solid #6b4984;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 20px;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
+    margin-top: 1rem;
 }
 
 .solution-button:hover {
     background: #6b4984;
     color: white;
+    transform: translateY(-1px);
 }
 
 /* Feedback-Bereich */
 .feedback {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    border-radius: 8px;
+    margin-top: 2rem;
+    padding: 2rem;
+    border-radius: 12px;
     background: #f8f9fa;
+    border-left: 4px solid var(--primary-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .feedback.hidden {
@@ -154,6 +214,7 @@ body {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
     z-index: 1000;
 }
 
@@ -169,13 +230,22 @@ body {
 
 .modal-content {
     background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    max-width: 600px;
+    padding: 3rem;
+    border-radius: 16px;
+    max-width: 800px;
     width: 90%;
-    max-height: 80vh;
+    max-height: 85vh;
     overflow-y: auto;
     position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
 }
 
 .close-modal {
@@ -187,124 +257,164 @@ body {
     color: #666;
     background: none;
     border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
 }
 
 .close-modal:hover {
+    background: #f0f0f0;
     color: #333;
 }
 
-/* Bottom Navigation */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: space-around;
-    padding: 1rem;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+/* Lösungsschritte */
+.solution-content {
+    color: #2c3e50;
 }
 
-.nav-item {
+.solution-final {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.solution-steps {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
+}
+
+.solution-step {
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.solution-step:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.solution-step p {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+/* Mathematische Werkzeuge */
+.math-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.math-tool {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 45px;
+    height: 45px;
+    display: flex;
     align-items: center;
-    text-decoration: none;
-    color: #666;
-    flex: 1;
-    padding: 0.5rem;
-    transition: color 0.3s ease;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    font-family: 'Cambria Math', 'Times New Roman', serif;
 }
 
-.nav-item.active {
-    color: var(--primary-color);
+.math-tool:hover {
+    background: var(--primary-gradient);
+    color: white;
+    transform: translateY(-2px);
+    border-color: transparent;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.nav-item svg {
-    margin-bottom: 0.25rem;
-}
-
-.nav-item span {
-    font-size: 0.8rem;
+/* Fehlermeldung */
+.error-message {
+    color: #e74c3c;
+    padding: 1rem;
+    background: #fdf0ed;
+    border-radius: 8px;
+    margin-top: 1rem;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .exercise-container {
         margin: 1rem;
-        padding: 1rem;
+        padding: 1.5rem;
     }
 
-    .math-tools {
-        justify-content: center;
+    .exercise-text {
+        padding: 1.5rem;
+    }
+
+    .exercise-text h3 {
+        font-size: 1.5rem;
+    }
+
+    .solution-step {
+        padding: 1rem;
     }
 
     .modal-content {
+        padding: 2rem;
         width: 95%;
-        padding: 1rem;
+        margin: 1rem;
     }
 }
 
 @media (max-width: 480px) {
-    .exercise-header h2 {
-        font-size: 1.5rem;
+    .exercise-container {
+        padding: 1rem;
     }
 
     .exercise-text h3 {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
     }
 
-    .exercise-text p {
+    .math-tool {
+        padding: 0.5rem;
         font-size: 1rem;
+        min-width: 40px;
+        height: 40px;
     }
-}
-
-/* Mathematisches Eingabefeld */
-#math-input {
-    min-height: 50px;
-    padding: 0.5rem;
-    border-radius: 4px;
-    background: #f8f9fa;
-    cursor: text;
-}
-
-.math-tool {
-    background: #f8f9fa;
-    border: 1px solid rgba(107, 73, 132, 0.2);
-    border-radius: 4px;
-    padding: 0.5rem;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    min-width: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.math-tool:hover {
-    background: var(--primary-color);
-    color: white;
-    transform: translateY(-2px);
 }
 
 /* MathQuill Anpassungen */
 .mq-editable-field {
     border: none !important;
     box-shadow: none !important;
-    background: #f8f9fa !important;
-    min-height: 50px;
-    font-size: 1.1rem !important;
+    background: transparent !important;
+    min-height: 60px;
+    font-size: 1.2rem !important;
 }
 
 .mq-editable-field.mq-focused {
     box-shadow: none !important;
     border: none !important;
-    outline: 2px solid var(--primary-color) !important;
+    outline: none !important;
 }
 
 .mq-math-mode .mq-root-block {
-    padding: 0.5rem !important;
+    padding: 0.75rem !important;
 }
