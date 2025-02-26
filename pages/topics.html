@@ -11,8 +11,8 @@
     <header>
         <div class="header-container">
             <div class="logo-section">
-                <img src="../images/logo.png" alt="Mathly Logo" class="logo">
-                <h1>Mathly</h1>
+                <img src="../images/mathematik-logo.png" alt="Mathly Logo" class="logo" id="subject-logo">
+                <h1 id="subject-title">Mathly</h1>
             </div>
             <div class="search-section">
                 <div class="search-box">
@@ -33,121 +33,26 @@
 
     <main>
         <section class="topics-section">
-            <h2>Themengebiete</h2>
-            <div class="category-grid">
-                <div class="category-card" onclick="showTopics('algebra')">
-                    <img src="../images/algebra-icon.jpg" alt="Algebra">
-                    <h3>Algebra</h3>
-                </div>
-                <div class="category-card" onclick="showTopics('geometry')">
-                    <img src="../images/geometry-icon.png" alt="Geometrie">
-                    <h3>Geometrie</h3>
-                </div>
-                <div class="category-card" onclick="showTopics('analysis')">
-                    <img src="../images/analysis-icon.png" alt="Analysis">
-                    <h3>Analysis</h3>
-                </div>
-                <div class="category-card" onclick="showTopics('statistics')">
-                    <img src="../images/statistics-icon.png" alt="Statistik">
-                    <h3>Statistik</h3>
-                </div>
+            <h2 id="topics-header">Themengebiete</h2>
+            <div class="category-grid" id="category-grid">
+                <!-- Kategorien werden dynamisch eingefügt -->
             </div>
         </section>
 
-        <!-- Themen für jede Kategorie (anfangs versteckt) -->
-        <section id="algebra-topics" class="topic-section" style="display: none;">
-            <h2>Algebra</h2>
-            <div class="topic-grid">
-                <div class="topic-card">
-                    <h3>Quadratische Funktionen</h3>
-                    <p>Grundlagen und Anwendungen</p>
-                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
-                </div>
-                <div class="topic-card">
-                    <h3>Lineare Gleichungen</h3>
-                    <p>Gleichungen lösen und verstehen</p>
-                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
-                </div>
-                <div class="topic-card">
-                    <h3>Terme und Variablen</h3>
-                    <p>Mathematische Ausdrücke</p>
-                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="geometry-topics" class="topic-section" style="display: none;">
-            <h2>Geometrie</h2>
-            <div class="topic-grid">
-                <div class="topic-card">
-                    <h3>Pythagoras</h3>
-                    <p>Der Satz des Pythagoras</p>
-                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
-                </div>
-                <div class="topic-card">
-                    <h3>Flächenberechnung</h3>
-                    <p>Flächen verschiedener Formen</p>
-                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
-                </div>
-                <div class="topic-card">
-                    <h3>Kreise und Winkel</h3>
-                    <p>Grundlagen der Kreisgeometrie</p>
-                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="analysis-topics" class="topic-section" style="display: none;">
-            <h2>Analysis</h2>
-            <div class="topic-grid">
-                <div class="topic-card">
-                    <h3>Differentialrechnung</h3>
-                    <p>Ableitungen und ihre Anwendungen</p>
-                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
-                </div>
-                <div class="topic-card">
-                    <h3>Integralrechnung</h3>
-                    <p>Grundlagen der Integration</p>
-                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
-                </div>
-                <div class="topic-card">
-                    <h3>Kurvendiskussion</h3>
-                    <p>Funktionen analysieren</p>
-                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="statistics-topics" class="topic-section" style="display: none;">
-            <h2>Statistik</h2>
-            <div class="topic-grid">
-                <div class="topic-card">
-                    <h3>Datenanalyse</h3>
-                    <p>Grundlegende statistische Konzepte</p>
-                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
-                </div>
-                <div class="topic-card">
-                    <h3>Wahrscheinlichkeit</h3>
-                    <p>Wahrscheinlichkeitsrechnung</p>
-                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
-                </div>
-                <div class="topic-card">
-                    <h3>Diagramme</h3>
-                    <p>Daten visualisieren</p>
-                    <button onclick="window.location.href='exercise-template.html'">Jetzt lernen</button>
-                </div>
-            </div>
-        </section>
+        <!-- Themen für jede Kategorie -->
+        <div id="topics-container">
+            <!-- Themen werden dynamisch eingefügt -->
+        </div>
     </main>
 
     <nav class="bottom-nav">
-        <a href="homepage.html" class="nav-item">
+        <a href="#" class="nav-item" id="home-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                 <path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z"/>
             </svg>
             <span>Home</span>
         </a>
-        <a href="#" class="nav-item active">
+        <a href="topics.html" class="nav-item active">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                 <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
             </svg>
@@ -161,12 +66,8 @@
         </a>
     </nav>
 
-    <script>
-        function showTopics(topic) {
-            localStorage.setItem('selectedTopic', topic);
-            window.location.href = 'exercise-template.html';
-        }
-    </script>
+    <script src="../scripts/subjects.js"></script>
     <script src="../scripts/topics.js"></script>
+    <script src="../scripts/homepage.js"></script>
 </body>
 </html>
