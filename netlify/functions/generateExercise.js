@@ -1,6 +1,6 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
     // Nur POST-Anfragen erlauben
     if (event.httpMethod !== 'POST') {
         return {
@@ -35,6 +35,10 @@ exports.handler = async (event) => {
             }
         );
 
+        if (!response.ok) {
+            throw new Error(`API-Anfrage fehlgeschlagen: ${response.statusText}`);
+        }
+
         const result = await response.json();
 
         // Antwort formatieren
@@ -60,9 +64,13 @@ exports.handler = async (event) => {
         };
 
     } catch (error) {
+        console.error('Fehler:', error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'Interner Server-Fehler' })
+            body: JSON.stringify({ 
+                error: 'Interner Server-Fehler',
+                details: error.message 
+            })
         };
     }
 }; 
