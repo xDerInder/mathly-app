@@ -80,8 +80,8 @@ async function loadExercise() {
         document.getElementById('feedback').classList.add('hidden');
         document.getElementById('solution-modal').classList.add('hidden');
         
-        // Math-Input zurücksetzen
-        if (window.mathInput && currentSubject === 'mathematik') {
+        // Math-Input zurücksetzen, nur wenn es existiert und initialisiert ist
+        if (window.mathInput && window.mathInput.mathField && currentSubject === 'mathematik') {
             window.mathInput.clearInput();
         }
 

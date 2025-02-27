@@ -8,12 +8,20 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initMathQuill() {
-    mathField = MQ.MathField(document.getElementById('math-input'), {
+    const mathInputElement = document.getElementById('solution-input');
+    if (!mathInputElement) {
+        console.error('Math input element nicht gefunden');
+        return;
+    }
+    
+    mathField = MQ.MathField(mathInputElement, {
         spaceBehavesLikeTab: true,
         handlers: {
             edit: function() {
                 // Hier können wir auf Änderungen reagieren
-                console.log('Math Input geändert:', mathField.latex());
+                if (mathField) {
+                    console.log('Math Input geändert:', mathField.latex());
+                }
             },
             enter: function() {
                 // Bei Enter-Taste Überprüfung starten
@@ -23,6 +31,12 @@ function initMathQuill() {
         autoCommands: 'pi theta sqrt sum prod int',
         autoOperatorNames: 'sin cos tan'
     });
+
+    // Speichere mathField in window.mathInput
+    window.mathInput = {
+        ...window.mathInput,
+        mathField: mathField
+    };
 }
 
 function setupEventListeners() {
