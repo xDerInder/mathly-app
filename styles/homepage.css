@@ -248,7 +248,7 @@ h2 {
 
 .topic-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
 }
 
@@ -259,26 +259,42 @@ h2 {
     padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(107, 73, 132, 0.1);
     border: 1px solid rgba(107, 73, 132, 0.2);
+    transition: transform 0.2s;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.topic-card:hover {
+    transform: translateY(-5px);
 }
 
 .topic-card h3 {
     color: var(--primary-color);
+    font-size: 1.3rem;
     margin-bottom: 0.5rem;
 }
 
 .topic-card p {
     color: #666;
     margin-bottom: 1rem;
+    flex-grow: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 .topic-card button {
-    background: linear-gradient(45deg, #6b4984, #84494b);
+    background: var(--primary-gradient);
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
-    border-radius: 6px;
-    cursor: pointer;
+    border-radius: 25px;
     font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: auto;
 }
 
 /* Challenge Section */
@@ -354,6 +370,12 @@ h2 {
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    .topic-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .header-container {
         flex-direction: row;
@@ -407,7 +429,8 @@ h2 {
     }
     
     .topic-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
     }
     
     .category-card {
@@ -421,6 +444,37 @@ h2 {
     
     h2 {
         font-size: 1.5rem;
+    }
+
+    .topic-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .topic-card {
+        padding: 1rem;
+        height: auto;
+        min-height: 140px;
+    }
+
+    .topic-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .topic-card p {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        display: block;
+        overflow: visible;
+        -webkit-line-clamp: unset;
+    }
+
+    .topic-card button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
     }
 }
 
@@ -452,5 +506,38 @@ h2 {
     
     .welcome-content h2 {
         font-size: 1.75rem;
+    }
+
+    .topic-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .topic-card {
+        padding: 0.75rem;
+        min-height: 120px;
+    }
+
+    .topic-card h3 {
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .topic-card p {
+        font-size: 0.75rem;
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
+    }
+
+    .topic-card button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+        width: 100%;
+        border-radius: 20px;
+    }
+
+    .topic-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
     }
 }

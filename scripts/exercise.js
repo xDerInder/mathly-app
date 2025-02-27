@@ -11,8 +11,37 @@ document.addEventListener('DOMContentLoaded', async function() {
     currentTopic = urlParams.get('topic') || '';
     currentSubtopic = urlParams.get('subtopic') || '';
 
-    // Fachspezifische Farben setzen
-    updateSubjectSpecificContent();
+    // Warten bis subjects.js geladen ist
+    if (typeof subjects === 'undefined') {
+        console.error('subjects.js ist nicht geladen');
+        return;
+    }
+
+    // Fachspezifische Farben und Inhalte setzen
+    const subject = subjects[currentSubject];
+    if (subject) {
+        // Farben setzen
+        const colors = subject.gradientColors;
+        document.documentElement.style.setProperty('--primary-color', colors[0]);
+        document.documentElement.style.setProperty('--secondary-color', colors[1]);
+        document.documentElement.style.setProperty('--primary-gradient', `linear-gradient(45deg, ${colors[0]}, ${colors[1]})`);
+        
+        // Breadcrumb aktualisieren
+        document.getElementById('subject-name').textContent = subject.name;
+        document.getElementById('topic-name').textContent = currentTopic || 'Allgemein';
+
+        // Math-Tools nur für Mathematik anzeigen
+        const mathTools = document.getElementById('math-tools');
+        if (mathTools) {
+            mathTools.style.display = currentSubject === 'mathematik' ? 'flex' : 'none';
+        }
+
+        // Math-Input-Feld anpassen
+        const mathInput = document.getElementById('math-input');
+        if (mathInput) {
+            mathInput.style.display = currentSubject === 'mathematik' ? 'block' : 'none';
+        }
+    }
 
     // Titel der Seite aktualisieren
     document.title = `${currentTopic} - Übungsaufgabe`;
@@ -44,36 +73,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
 });
 
-function updateSubjectSpecificContent() {
-    // Prüfen ob subjects.js geladen ist
-    if (typeof subjects === 'undefined') {
-        console.error('subjects.js ist nicht geladen');
-        return;
-    }
-
-    const subject = subjects[currentSubject];
-    if (!subject) {
-        console.error('Ungültiges Fach:', currentSubject);
-        return;
-    }
-
-    // Farben setzen
-    const colors = subject.gradientColors;
-    setSubjectColors(colors[0], colors[1]);
-
-    // Math-Tools nur für Mathematik anzeigen
-    const mathTools = document.getElementById('math-tools');
-    if (mathTools) {
-        mathTools.style.display = currentSubject === 'mathematik' ? 'flex' : 'none';
-    }
-
-    // Math-Input-Feld anpassen
-    const mathInput = document.getElementById('math-input');
-    if (mathInput) {
-        mathInput.style.display = currentSubject === 'mathematik' ? 'block' : 'none';
-    }
-}
-
 async function loadExercise() {
     try {
         const response = await fetch('/.netlify/functions/generateExercise', {
@@ -94,13 +93,6 @@ async function loadExercise() {
 
         currentExercise = await response.json();
         hintsShown = 0;
-
-        // Breadcrumb und fachspezifische Inhalte aktualisieren
-        if (subjects[currentSubject]) {
-            document.getElementById('subject-name').textContent = subjects[currentSubject].name;
-            document.getElementById('topic-name').textContent = currentTopic || 'Allgemein';
-            updateSubjectSpecificContent();
-        }
 
         // Aufgabe anzeigen
         document.getElementById('dynamic-exercise').innerHTML = `
@@ -172,14 +164,6 @@ function showSolution() {
     `;
 
     modal.classList.remove('hidden');
-}
-
-function setSubjectColors(primaryColor, secondaryColor) {
-    const root = document.documentElement;
-    root.style.setProperty('--primary-color', primaryColor);
-    root.style.setProperty('--secondary-color', secondaryColor);
-    root.style.setProperty('--primary-color-rgb', hexToRgb(primaryColor));
-    root.style.setProperty('--primary-gradient', `linear-gradient(45deg, ${primaryColor}, ${secondaryColor})`);
 }
 
 function hexToRgb(hex) {
