@@ -23,20 +23,26 @@
         </div>
 
         <div class="input-section">
-            <div class="math-input-field" id="math-input"></div>
+            <div class="input-container">
+                <label class="input-label" for="solution-input">Deine Lösung:</label>
+                <div id="solution-input" class="math-input-field" contenteditable="true"></div>
+            </div>
             
             <!-- Math Tools nur für Mathematik -->
             <div id="math-tools" class="math-tools" style="display: none;">
-                <button class="math-tool" onclick="mathInput.insertSymbol('+')" title="Addition">+</button>
-                <button class="math-tool" onclick="mathInput.insertSymbol('-')" title="Subtraktion">−</button>
-                <button class="math-tool" onclick="mathInput.insertSymbol('\\cdot')" title="Multiplikation">×</button>
-                <button class="math-tool" onclick="mathInput.insertSymbol('\\div')" title="Division">÷</button>
-                <button class="math-tool" onclick="mathInput.insertFraction()" title="Bruch">a/b</button>
-                <button class="math-tool" onclick="mathInput.insertSymbol('\\sqrt')" title="Wurzel">√</button>
-                <button class="math-tool" onclick="mathInput.insertPower()" title="Potenz">x²</button>
-                <button class="math-tool" onclick="mathInput.insertSymbol('\\pi')" title="Pi">π</button>
-                <button class="math-tool" onclick="mathInput.insertSymbol('=')" title="Gleich">=</button>
-                <button class="math-tool" onclick="mathInput.insertSymbol('\\infty')" title="Unendlich">∞</button>
+                <h4 class="math-tools-title">Mathematische Werkzeuge:</h4>
+                <div class="math-tools-grid">
+                    <button class="math-tool" onclick="mathInput.insertSymbol('+')" title="Addition">+</button>
+                    <button class="math-tool" onclick="mathInput.insertSymbol('-')" title="Subtraktion">−</button>
+                    <button class="math-tool" onclick="mathInput.insertSymbol('\\cdot')" title="Multiplikation">×</button>
+                    <button class="math-tool" onclick="mathInput.insertSymbol('\\div')" title="Division">÷</button>
+                    <button class="math-tool" onclick="mathInput.insertFraction()" title="Bruch">a/b</button>
+                    <button class="math-tool" onclick="mathInput.insertSymbol('\\sqrt')" title="Wurzel">√</button>
+                    <button class="math-tool" onclick="mathInput.insertPower()" title="Potenz">x²</button>
+                    <button class="math-tool" onclick="mathInput.insertSymbol('\\pi')" title="Pi">π</button>
+                    <button class="math-tool" onclick="mathInput.insertSymbol('=')" title="Gleich">=</button>
+                    <button class="math-tool" onclick="mathInput.insertSymbol('\\infty')" title="Unendlich">∞</button>
+                </div>
             </div>
 
             <button id="check-answer" class="check-button">Überprüfen</button>

@@ -17,12 +17,44 @@ export const handler = async (event) => {
 
         const { subject, topic, subtopic } = JSON.parse(event.body);
         
-        // Prompt für die KI vorbereiten
-        const prompt = `Generiere eine ${subject}-Aufgabe zum Thema ${topic} (${subtopic}). Die Antwort MUSS im folgenden JSON-Format sein: {"question": "Aufgabenstellung hier", "hints": ["Hinweis 1", "Hinweis 2"], "solution": "Lösung hier", "solutionSteps": ["Schritt 1", "Schritt 2"]}`;
+        const promptConfig = {
+            subject: subject,
+            topic: topic,
+            subtopic: subtopic,
+            forceNew: true,
+            config: {
+                language: "German",
+                formatting: {
+                    useLaTeX: true,
+                    stepByStep: true,
+                    decimalSeparator: ",",
+                },
+                difficulty: {
+                    adaptiveDifficulty: true,
+                    maxComplexity: {
+                        chemistry: "medium"
+                    }
+                },
+                validation: {
+                    allowEquivalentAnswers: true,
+                    naturalLanguageComparison: true,
+                    toleranceRange: 0.01,
+                },
+                requirements: {
+                    minQuestionLength: 50,
+                    contextRequired: true,
+                    solutionStepsRequired: true,
+                    formatSolution: {
+                        steps: true,
+                        equations: "LaTeX",
+                        finalAnswer: "highlighted"
+                    }
+                }
+            }
+        };
 
         console.log('Sende Anfrage an Hugging Face API...');
 
-        // Hugging Face API aufrufen
         const response = await fetch(
             'https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2',
             {
@@ -31,14 +63,7 @@ export const handler = async (event) => {
                     'Authorization': `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    inputs: prompt,
-                    parameters: {
-                        max_new_tokens: 500,
-                        temperature: 0.7,
-                        return_full_text: false
-                    }
-                })
+                body: JSON.stringify(promptConfig)
             }
         );
 

@@ -75,6 +75,17 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 async function loadExercise() {
     try {
+        // Bestehende Aufgabe und Feedback zurücksetzen
+        currentExercise = null;
+        document.getElementById('feedback').classList.add('hidden');
+        document.getElementById('solution-modal').classList.add('hidden');
+        
+        // Math-Input zurücksetzen
+        if (window.mathInput && currentSubject === 'mathematik') {
+            window.mathInput.clearInput();
+        }
+
+        // Neue Aufgabe vom Server anfordern
         const response = await fetch('/.netlify/functions/generateExercise', {
             method: 'POST',
             headers: {
@@ -83,7 +94,8 @@ async function loadExercise() {
             body: JSON.stringify({ 
                 subject: currentSubject, 
                 topic: currentTopic, 
-                subtopic: currentSubtopic 
+                subtopic: currentSubtopic,
+                forceNew: true // Signal an den Server, dass eine neue Aufgabe generiert werden soll
             })
         });
 
@@ -99,15 +111,6 @@ async function loadExercise() {
             <h3>${currentTopic}</h3>
             <p class="exercise-question">${currentExercise.question}</p>
         `;
-
-        // Feedback und Lösungsweg ausblenden
-        document.getElementById('feedback').classList.add('hidden');
-        document.getElementById('solution-modal').classList.add('hidden');
-
-        // Math-Input zurücksetzen
-        if (window.mathInput && currentSubject === 'mathematik') {
-            window.mathInput.clearInput();
-        }
 
     } catch (error) {
         console.error('Fehler beim Laden der Aufgabe:', error);
@@ -176,4 +179,18 @@ function hexToRgb(hex) {
     const b = parseInt(hex.substring(4, 6), 16);
     
     return `${r}, ${g}, ${b}`;
+}
+
+function updateSubjectSpecificContent() {
+    const subject = currentSubject || getSubjectFromUrl();
+    const mathTools = document.getElementById('math-tools');
+    const inputHint = document.querySelector('.input-hint');
+    
+    if (subject === 'mathematik') {
+        mathTools.style.display = 'flex';
+        if (inputHint) inputHint.style.display = 'block';
+    } else {
+        mathTools.style.display = 'none';
+        if (inputHint) inputHint.style.display = 'none';
+    }
 } 
